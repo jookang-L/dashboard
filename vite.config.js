@@ -4,6 +4,7 @@ import tailwindcss from '@tailwindcss/vite'
 import { exec } from 'child_process'
 
 export default defineConfig({
+  base: '/dashboard/',
   plugins: [
     react(),
     tailwindcss(),
