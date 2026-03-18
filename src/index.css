@@ -1,0 +1,249 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #eef0f4;
+  --panel: #e4e7ed;
+  --card: #f5f6f9;
+  --text: #2a3140;
+  --heading: #111827;
+  --muted: #6b7a90;
+  --border: #dce0e8;
+  --accent: #5f6fff;
+  --accent-soft: #e8ebff;
+  --shadow: 0 8px 24px rgba(20, 29, 45, 0.06);
+}
+
+html[data-theme='dark'] {
+  --bg: #131720;
+  --panel: #1a2030;
+  --card: #212a3a;
+  --text: #d8deeb;
+  --heading: #f1f5ff;
+  --muted: #8a9ab4;
+  --border: #2e3a50;
+  --accent: #7d8dff;
+  --accent-soft: #2d3750;
+  --shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+}
+
+@theme inline {
+  --color-dashboard-bg: var(--bg);
+  --color-dashboard-panel: var(--panel);
+  --color-dashboard-card: var(--card);
+  --color-dashboard-text: var(--text);
+  --color-dashboard-heading: var(--heading);
+  --color-dashboard-muted: var(--muted);
+  --color-dashboard-border: var(--border);
+  --color-dashboard-accent: var(--accent);
+  --shadow-dashboard: var(--shadow);
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Nunito', 'Noto Sans KR', 'Segoe UI', sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── Shortcut buttons ─── */
+.shortcut-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--heading);
+  border-radius: 10px;
+  min-width: 36px;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  padding-inline: 8px;
+  transition: all 0.15s ease;
+}
+.shortcut-btn:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ─── Timeline calendar cells ─── */
+.tl-cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.tl-cell:hover {
+  background: var(--panel);
+  border-color: var(--border);
+}
+.tl-today {
+  background: var(--accent) !important;
+  border-color: var(--accent) !important;
+  color: #fff !important;
+  border-radius: 14px;
+  font-weight: 800;
+  box-shadow: 0 4px 12px rgba(95, 111, 255, 0.3);
+}
+
+/* ─── Dark hover tooltip ─── */
+.tl-tooltip {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  margin-top: 8px;
+  min-width: 140px;
+  max-width: 200px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: #1c1c1e;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.tl-tooltip::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-bottom-color: #1c1c1e;
+}
+
+/* ─── Inputs ─── */
+.input-sm {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 6px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+.input-sm:focus {
+  border-color: var(--accent);
+}
+
+/* ─── Action buttons ─── */
+.action-btn, .action-btn-muted {
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 6px 10px;
+  border: 1px solid var(--border);
+  transition: all 0.15s ease;
+  cursor: pointer;
+}
+.action-btn {
+  background: var(--heading);
+  border-color: var(--heading);
+  color: #fff;
+}
+.action-btn:hover { opacity: 0.85; }
+.action-btn-muted {
+  background: var(--panel);
+  color: var(--heading);
+}
+.action-btn-muted:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ─── Dropzones ─── */
+.dropzone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  border: 1px dashed var(--border);
+  background: color-mix(in srgb, var(--panel) 80%, transparent);
+  transition: all 0.15s ease;
+}
+.dropzone-active {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+}
+
+/* ─── Focus mode ─── */
+.focus-dim {
+  filter: blur(1.7px);
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ─── Info cards ─── */
+.info-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  padding: 10px 12px;
+}
+.info-title {
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+/* ─── Settings modal fields ─── */
+.setting-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--heading);
+}
+.setting-field input,
+.setting-field textarea {
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  color: var(--text);
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+}
+.setting-field input:focus,
+.setting-field textarea:focus {
+  border-color: var(--accent);
+}
+
+/* ─── Pulse animation ─── */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(95, 111, 255, 0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(95, 111, 255, 0); }
+}
+.pulse-active {
+  animation: pulseGlow 1.4s ease-in-out infinite;
+}
+
+/* ─── Scrollbar ─── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
